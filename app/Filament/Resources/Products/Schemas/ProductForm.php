@@ -3,6 +3,8 @@
 namespace App\Filament\Resources\Products\Schemas;
 
 use App\Filament\Resources\Categories\Schemas\CategoryForm;
+use App\Models\AttributeValue;
+use App\Models\Brand;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Select;
@@ -40,6 +42,20 @@ class ProductForm
                                 ->options(CategoryForm::getCategoryOptions())
                                 ->searchable()
                                 ->required(),
+                                Select::make('brand_id')
+                                ->label('Brand')
+                                ->relationship('brand', 'name')
+                                ->searchable()
+                                ->preload()
+                                ->nullable(),
+                                Select::make('attributeValues')
+                                ->label('Attributes')
+                                ->multiple()
+                                ->relationship('attributeValues', 'value')
+                                ->getOptionLabelFromRecordUsing(fn (AttributeValue $value) => 
+                                    $value->attribute->name . ': ' . $value->value)
+                                ->searchable()
+                                ->preload(),
                                 TextInput::make('sku')
                                 ->label('SKU')
                                 ->required(),

@@ -11,6 +11,7 @@ class Product extends Model
         'category_id',
         'name',
         'slug',
+        'brand_id',
         'description',
         'price',
         'sale_price',
@@ -50,5 +51,15 @@ class Product extends Model
     public function variants()
     {
         return $this->hasMany(ProductVariant::class);
+    }
+
+    public function brand()
+    {
+        return $this->belongsTo(Brand::class);
+    }
+
+    public function attributeValues()
+    {
+        return $this->belongsToMany(AttributeValue::class);
     }
 }
