@@ -17,11 +17,9 @@ class BannersTable
         return $table
             ->columns([
                 TextColumn::make('title')
-                    ->searchable()
-                    ->length(50),
+                    ->searchable(),
                 ImageColumn::make('image')
-                    ->disk('public')
-                    ->length(50),
+                    ->disk('public'),
                 TextColumn::make('type')
                     ->badge()
                     ->color(fn ($state) => match ($state) {

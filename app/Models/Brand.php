@@ -17,4 +17,9 @@ class Brand extends Model
     {
         return $this->hasMany(Product::class);
     }
+
+    public function coupons()
+    {
+        return $this->belongsToMany(Coupon::class, 'brand_coupon');
+    }
 }
